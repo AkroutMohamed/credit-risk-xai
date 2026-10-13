@@ -1,5 +1,12 @@
 """End-to-end interactive explainable credit scoring dashboard."""
 from __future__ import annotations
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 import json
 import io
 import joblib
@@ -11,6 +18,7 @@ import requests
 import streamlit as st
 from sklearn.metrics import roc_curve, precision_recall_curve
 from src.data import load_uci, normalize, audit, TARGET
+
 from src.ml import MODELS, split_data, fit_models, compare, metrics
 from src.explain import global_importance, shap_local, lime_local, human_summary
 
